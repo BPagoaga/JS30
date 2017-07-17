@@ -1,1 +1,1 @@
-/usr/bin/bash: q: command not found
+#JS30
