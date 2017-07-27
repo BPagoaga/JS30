@@ -97,25 +97,28 @@
     </div>
 
     <script>
-        const checkboxes = document.querySelectorAll('input[type=checkbox]');
-        let checked = null;
+    const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    let lastChecked;
 
-        let isChecked = false;
-        let minIndex = 0;
-        let maxIndex = checkboxes.length;
+    function selectAll(e) {
+        let inBetween = false;
 
+        if (e.shiftKey && this.checked) {
+            checkboxes.forEach(checkbox => {
+                if (checkbox === this || checkbox === lastChecked) {
+                    inBetween = !inBetween;
+                }
 
-        function selectAll(e) {
-            checked = document.querySelector(':checked');
-            console.log(checked)
-            if (e.shiftKey && checked) {
-                console.log('test')
-            }
-            isChecked = this.checked;
-            return this.checked;
-        };
+                if (inBetween) {
+                    checkbox.checked = true;
+                }
+            })
+        }
+        
+        lastChecked = this;
+    };
 
-        checkboxes.forEach(checkbox => checkbox.addEventListener('click', selectAll));
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', selectAll));
     </script>
 </body>
 
