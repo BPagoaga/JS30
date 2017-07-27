@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()" class="test">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+    // inspect element => break on "attribute modification" (for example)
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('I am a %s string', '+poop'); // now we have template strings with backticks
+
+    // Styled
+    console.log('%c Great text !', 'font-size: 50px; color: red');
+
+    // warning!
+    console.warn('Be careful !');
+    // Error :|
+    console.error('I warned you !');
+
+    // Info
+    console.info('this is not a fun fact');
+
+    // Testing
+    console.assert(1 === 1, 'this is wrong !');
+    console.assert(1 === 2, 'this is wrong !');
+
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'this is wrong');
+    console.assert(p.classList.contains('test'), 'this is wrong');
+    // clearing
+    //        console.clear();
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog => {
+        //console.groupCollapsed()
+        console.group(dog.name);
+        console.log('This is ', dog.name);
+        console.log(`${dog.name} is ${dog.age} years old.`);
+        console.groupEnd(dog.name);
+
+    })
+    // counting
+    console.count('bernard');
+    console.count('bernard');
+    console.count('thierry');
+
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/bpagoaga')
+        .then(data => data.json())
+        .then(data => {
+            console.timeEnd('fetching data');
+            console.log(data);
+        })
+
+    console.table(dogs);
+
+  </script>
+</body>
+</html>
