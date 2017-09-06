@@ -12,6 +12,10 @@
 <script>
     console.log('😸')
     window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!('webkitSpeechRecognition' in window)) {
+      alert('upgrade')
+      upgrade()
+    }
     // write as we speech
     const recognition = new SpeechRecognition()
     recognition.interimResults = true;
